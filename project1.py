@@ -1,8 +1,10 @@
 import time
 import random
 
+glob_execution_time = 0
+
 def cmpe_algorithm(arr: list) -> int:
-    count = 0
+    global glob_execution_time
     n = len(arr)
     start_time = time.time()
     res = 1
@@ -12,33 +14,33 @@ def cmpe_algorithm(arr: list) -> int:
                 k = i + n
                 for y in range(0, n+1, j):
                     k = k - 1
-                    count +=1
                 res = res + k
+                
         elif arr[i] == 'm':
             z = 1
             while z < n:
                 z = z * 2
-                count +=1
                 res = res + z
+
         elif arr[i] == 'p':
             w = n
             res = res - 1
             while w > 0:
                 w = w // 5
-                count +=1
                 res = res + 1
+
         elif arr[i] == 'e':
             for m in range(1, i+1):
                 p = m
+
                 for l in range(m, n+1):
                     for t in range(n, 0, -1):
                         p = p + t
-                        count +=1
                     res = res + p
+                    
     end_time = time.time()
     execution_time = end_time - start_time
-    print(execution_time)
-    print(count)
+    glob_execution_time += execution_time
     return res
 
 
@@ -59,13 +61,24 @@ def array_generator(scenario, size):
     return arr
  
 
-scenario = input()
-size = int(input())
+# scenario = input()
+# size = int(input())
 
 
-arr = array_generator(scenario, size)
-arr[0] = 'e'
-print(arr)
-cmpe_algorithm(arr)
+# arr = array_generator(scenario, size)
+
+# print(arr)
+# cmpe_algorithm(arr)
 
 
+# for j in [1, 5, 10, 20, 30, 40, 50, 60, 70, 90,
+# 100, 120, 130, 140, 150, 160, 170]:
+    
+#     for i in range(10):
+#          arr = array_generator('worst', j)
+#          cmpe_algorithm(arr)
+#     print(j,":: worst execution time is : " ,glob_execution_time/10)
+
+
+
+#     glob_execution_time = 0
