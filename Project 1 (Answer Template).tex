@@ -7,6 +7,7 @@
 \usepackage{hyperref}
 \usepackage{float}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{pgfplots}
 \pgfplotsset{width=10cm,compat=1.9}
 
@@ -21,7 +22,7 @@
 	\and
 	Yusuf Anıl Yazıcı\\2021400207
 }
-\date{\today}
+\date{November 17, 2024}
 
 %-- DOCUMENT ---%
 
@@ -39,23 +40,36 @@
 Assuming that the comparison marked as (1) is the basic operation, the number of basic operations remains the same for all cases, as the comparison is executed with every increment in the for loop, regardless of any other operations and input types.
 
 \subsubsection{Analysis of B(n)}
-As the for loop executes \( n \) times, the comparison is also executed \( n \) times. Therefore, the number of basic operations is \( n \), which implies asymptotic notation of \(\boldsymbol{\theta(n)}\).
+As the for loop executes \( n \) times, the comparison is also executed \( n \) times. Therefore, the number of basic operations is \( n \) ,which implies asymptotic notation of $\theta(n)$.
+\[
+B(n) = n \in \boldsymbol{\theta(n)}
+\]
 
 \subsubsection{Analysis of W(n)}
-As the for loop executes \( n \) times, the comparison is also executed \( n \) times. Therefore, the number of basic operations is \( n \), which implies asymptotic notation of \(\boldsymbol{\theta(n)}\).
+As the for loop executes \( n \) times, the comparison is also executed \( n \) times. Therefore, the number of basic operations is \( n \), which implies asymptotic notation of $\theta(n)$.
+\[
+W(n) = n \in \boldsymbol{\theta(n)}
+\]
 
 \subsubsection{Analysis of A(n)}
-As the for loop executes \( n \) times, the comparison is also executed \( n \) times. Therefore, the number of basic operations is \( n \), which implies asymptotic notation of \(\boldsymbol{\theta(n)}\).
+As the for loop executes \( n \) times, the comparison is also executed \( n \) times. Therefore, the number of basic operations is \( n \), which implies asymptotic notation of $\theta(n)$.
+\[
+A(n) = n \in \boldsymbol{\theta(n)}
+\]
 
 
 	\subsection{Basic operations are the two loop increments marked as (2)}
 
 	\subsubsection{Analysis of B(n)}
-The best case for the input occurs when all elements of the array are either 'm' or 'p', as the marked basic operations are never executed. This is because the corresponding \texttt{if} conditions that trigger the execution of the marked operations are never satisfied. Thus, the number of basic operations for such an input is 0, which implies asymptotic notation of \(\boldsymbol{\theta(1)}\).
+The best case for the input occurs when all elements of the array are either 'm' or 'p', as the marked basic operations are never executed. This is because the corresponding \texttt{if} conditions that trigger the execution of the marked operations are never satisfied. Thus, the number of basic operations for such an input is 0, which implies asymptotic notation of $O(1)$.
+
+\[
+B(n) = 0 \in \boldsymbol{O(1)}
+\]
 
 	\subsubsection{Analysis of W(n)}
  
-The worst-case scenario occurs when the array consists only of 'c' letters, as this triggers the execution of the basic operation based on the input size each time, unlike the 'e' case, which depends on the index of the letter. This ensures that the basic operation is executed more frequently. 
+The worst-case scenario occurs when the array consists only of 'c' letters, as this triggers the execution of the basic operation based on the input size each time, unlike the 'e' case, which depends on the index of the letter. This ensures that the basic operation is executed more frequently.
 
 The y-value of the inner for loop jumps \( j \) times—which depends on the value of \( i \) in the outer loop—every time it is iterated, yielding the following equation: \(( n +  \sum_{i=1}^{n} \lfloor\frac{n}{i} \rfloor)\).
 
@@ -66,56 +80,72 @@ Taking into account the outer loop, which executes n times, the notation for the
 n \cdot \left( n +  \sum_{i=1}^{n} \lfloor \frac{n}{i} \rfloor \right)
 \]
 \end{flushleft}
-The summation notation \(\sum_{i=1}^{n} \lfloor \frac{n}{i} \rfloor\) yields \(\theta(n \log n)\) due to the harmonic series' behavior when summed over all \( i \). Since this term is multiplied by \( n \) in the final expression \( n \cdot \left( n + \sum_{i=1}^{n} \lfloor \frac{n}{i} \rfloor \right) \), the resulting time complexity becomes \(\theta(n^2 \log n)\). This is because multiplying \(\theta(n \log n)\) by \( n \) scales the complexity to \(\boldsymbol{\theta(n^2 \log n)}\).
+The summation notation \(\sum_{i=1}^{n} \lfloor \frac{n}{i} \rfloor\) yields \(\theta(n \log n)\) due to the harmonic series' behavior when summed over all \( i \). Since this term is multiplied by \( n \) in the final expression \( n \cdot \left( n + \sum_{i=1}^{n} \lfloor \frac{n}{i} \rfloor \right) \), the resulting time complexity becomes \(\theta(n^2 \log n)\). This is because multiplying \(\theta(n \log n)\) by \( n \) scales the complexity to $\theta(n^2 \log n)$.
+
+
+\[
+W(n) = n \cdot \left( n +  \sum_{i=1}^{n} \lfloor \frac{n}{i} \rfloor \right) \in \boldsymbol{\theta(n^2 \log n)}
+\]
 
 
 	\subsubsection{Analysis of A(n)}
- The average case analysis requires considering the probability distribution of the different input elements ('c', 'm', 'p', 'e') and the number of times the basic operations are executed for each scenario. The notation for the analysis is given by:
+ The average case analysis requires considering the probability distribution of the different input elements ('c', 'm', 'p', 'e') and the number of times the basic operations are executed for each scenario. Let's divide the analysis into steps and clearly analyze the conditional probabilities.
 
-\begin{equation*}
-\frac{n}{8} \cdot \left( n +  \sum_{i=1}^{n} \lfloor \frac{n}{i} \rfloor \right) + \frac{n}{4} \cdot 0 + \frac{n}{8} \cdot 0 + \frac{1}{2} \sum_{i=0}^{n-1} i
-\end{equation*}
+\[
+A(n) = \mathbb{E}[T] = \mathbb{E}[T_1] + \mathbb{E}[T_2] + \mathbb{E}[T_3]
+\]
 
-Breaking down this equation: 
+ where $T_1$ is the number of basic operations involved when the if condition matches 'c', $T_2$ is the number of basic operations involved when the if condition matches either 'm' or 'p' and $T_3$ is the number of basic operations involved when the if condition matches 'e'.
 
- \textbf {1. Contribution of 'c' (with probability \(\frac{1}{8}\))}:
+\textbf{1. $\mathbf{E[T_1]}$}:
+ The occurrence of the letter 'c' in a n-size array is n/8 on average as the probability suggests. The expression in the parentheses is analyzed for the worst-case scenario, the difference is only the number of 'c' letters. This is handled by dividing the size by eight giving the expression below:
    \[
    \frac{n}{8} \cdot \left( n +  \sum_{i=1}^{n} \lfloor \frac{n}{i} \rfloor \right)\]
-   This term contributes \(\theta(n^2 \log n)\) as the summation \(\sum_{i=1}^{n} \lfloor \frac{n}{i} \rfloor\) yields \(\theta(n \log n)\)  when summed. Multiplying by \( \frac{n}{8} \) results in \(\theta(n^2 \log n)\).
+   
 
- \textbf{2. Contribution of 'm' and 'p' (with probabilities \(\frac{1}{4}\) and \(\frac{1}{8}\)):}
+\textbf{2. $\mathbf{E[T_2]}$}:
+In the if blocks that check whether the element of the array is 'm' or 'p', no basic operations are performed, as these code blocks do not contain any basic operation. Thus, the equation is as follows:
    \[\frac{n}{4} \cdot 0 + \frac{n}{8} \cdot 0 \]
-   These terms do not contribute to the basic operations as they yield 0. 
+   These terms do not contribute to the basic operations as they yield 0.
 
-\textbf{3. Contribution of 'e' (with probability \(\frac{1}{2}\)):}
-   \[
-   \frac{1}{2} \sum_{i=0}^{n-1} i
-   \]
-   This term simplifies to \(\frac{1}{2} \cdot \frac{(n-1)n}{2}\), which is \(\theta(n^2)\).
+\textbf{3. $\mathbf{E[T_3]}$}:
+\[
+\mathbb{E}[T_3] = \sum_{i=0}^{n-1} \mathbb{E}[\tau \mid X=i] \cdot P(X=i)
+\]
+Here the X is the index of the 'c' letter, so $\mathbb{E}[\tau \mid X=i]$ = i and P(X=i) = 1/2 as it is given.
+Then, such an expression is obtained \[\mathbb{E}[T_3] = \sum_{i=0}^{n-1} \frac{i}{2} = \frac{n(n-1)}{4} = \frac{(n^2 - n)}{4}\]
 
-Combining these contributions:
+Combining these steps:
+\begin{equation*}
+A(n) = \frac{3n^2}{8} - \frac{n}{4} + \frac{n}{8} \cdot  \sum_{i=1}^{n} \lfloor \frac{n}{i} \rfloor 
+\end{equation*}
+
+In the right-most term, the summation notation \(\sum_{i=1}^{n} \lfloor \frac{n}{i} \rfloor\) yields \(\theta(n \log n)\) due to the harmonic series' behavior when summed over all \( i \). With the multiplication of the notation by n/8, the time complexity of the term results in \(\theta(n^2 \log n)\). That makes this term the most dominant one as n grows. Theta analysis is:
+
+
 
 \[
-\theta\left(\frac{n}{8} \cdot (n + n \log n)\right) + \theta\left(\frac{1}{2} \cdot \frac{(n-1)n}{2}\right)
+A(n) = \frac{3n^2}{8} - \frac{n}{4} + \frac{n}{8} \cdot  \sum_{i=1}^{n} \lfloor \frac{n}{i} \rfloor  \in \boldsymbol{\theta(n^2 \log n)}
 \]
 
-The dominant term here is \(\theta(n^2 \log n)\), as it grows faster than \(\theta(n^2)\). Therefore, the final average case complexity is:
 
-\[
-\boldsymbol{\theta(n^2 \log n)}
-\]
+
 
 
 	\subsection{Basic operations are the four assignments marked as (3)}
 
 \subsubsection{Analysis of B(n)}
 
-The best-case scenario for the input occurs when the first element is 'e' and the remaining elements are 'p'. When the first element is 'e', no basic operations are executed since the condition for the outer loop is not satisfied. In the case of 'p', the number of basic operations is determined by taking the floor of the array size divided by 5. The expression is:
+The best-case scenario for the input occurs when the first element is 'e' and the remaining elements are 'p'. When the first element is 'e', no basic operations are executed since the condition for the outer loop is not satisfied. In the case of 'p', the number of basic operations is determined by taking the floor of the array size divided by 5 continuously giving the logarithmic term. The expression is:
 \begin{equation*}
 0 + (n-1) \cdot \left( \lfloor \log_5 n \rfloor + 1 \right)
 \end{equation*}
 
-For larger inputs, \( (n-1) \) term behaves like \( n \) and the other term behaves like \( \log n \), which yields the complexity of \( \boldsymbol{\theta(n \log n)} \).
+For larger inputs, \( (n-1) \) term behaves like \( n \) and the other term behaves like \( \log n \), which yields the complexity of $\theta(n \log n)$.
+
+\[
+B(n) = (n-1) \cdot \left( \lfloor \log_5 n \rfloor + 1 \right) \in \boldsymbol{\theta(n \log n)}
+\]
 
 
 \subsubsection{Analysis of W(n)}
@@ -127,60 +157,180 @@ The worst-case scenario for the input occurs when the first element is 'c' and t
 n+ \frac{n^3 - n}{3} 
 \end{equation*}
 
-As n grows, the dominant term is $n^3$, implying the theta notation of \( \boldsymbol{\theta(n^3)} \).
+As n grows, the dominant term is $n^3$, implying the theta notation of $(\theta(n^3))$.
+
+\[
+W(n) = \frac{n^3 + 2n}{3}  \in \boldsymbol{\theta(n^3)}
+\]
 
 
 \subsubsection{Analysis of A(n)}
 
-The average-case analysis considers the probability distribution of different input scenarios and the number of times the assignments are executed. The expression for the average case is:
+ The average case analysis requires considering the probability distribution of the different input elements ('c', 'm', 'p', 'e') and the number of times the basic operations are executed for each scenario. Let's divide the analysis into steps and clearly analyze the conditional probabilities.
+
+ \[
+A(n) = \mathbb{E}[T] = \mathbb{E}[T_1] + \mathbb{E}[T_2] + \mathbb{E}[T_3] + \mathbb{E}[T_4]
+\]
+
+ where $T_1$ is the number of basic operations involved when the if condition matches 'c', $T_2$ is the number of basic operations involved when the if condition matches 'm', $T_3$ is the number of basic operations involved when the if condition matches 'p' and $T_4$ is the number of basic operations involved when the if condition matches 'e'.
+
+
+\textbf{1. $\mathbf{E[T_1]}$}:
+
+
+ The occurrence of the letter 'c' in a n-size array is n/8 on average as the probability suggests. The basic operation is performed n times for each term. As the frequency of ‘c’ is n/8, the following formula is obtained:
+   
+   \[
+   \frac{n}{8} \cdot  n \]
+
+   
+
+\textbf{2. $\mathbf{E[T_2]}$}:
+
+ For each term, number of basic operation is determined by a logarithmic term in base 2, since the basic operation is performed until n is exceeded by continuous multiplication of 2. Multiplying with the average occurrence of the letter 'm' in a n-size array, that is n/4, the following expression is obtained: 
+\[
+\frac{n}{4} \cdot \lceil \log_2 n \rceil
+\]
+
+\textbf{3. $\mathbf{E[T_3]}$}:
+
+For each term, the number of basic operations is determined by taking the floor of the array size divided by 5 continuously giving the logarithmic term in base 5. Multiplying with the average occurrence of the letter 'p' in a n-size array, that is n/8, the following expression is obtained: 
+\[ 
+\frac{n}{8} \cdot \left( \lfloor \log_5 n \rfloor + 1 \right)
+\]
+
+\textbf{4. $\mathbf{E[T_4]}$}:
+
+\[
+\mathbb{E}[T_4] = \sum_{i=0}^{n-1} \mathbb{E}[\tau \mid X=i] \cdot P(X=i)
+\]
+P(X = i) is 1/2 as it is given, and the $\mathbb{E}[\tau \mid X=i]$ is calculated as follows:
+\[
+\mathbb{E}[\tau \mid X=i] = \sum_{m=1}^{i} \sum_{l=m}^{n} 1 = ni - \frac{i^2}{2} + \frac{i}{2} 
+\]
+
+\[
+\mathbb{E}[T_4] = \frac{1}{2} \sum_{i=0}^{n-1} (ni - \frac{i^2}{2} + \frac{i}{2}) = \frac{n^3 - n}{6}
+\]
+
+Combining these contributions:
+
 \begin{equation*}
-\frac{n}{8} \cdot n + \frac{n}{4} \cdot \lceil \log_2 n \rceil + \frac{n}{8} \cdot \left( \lfloor \log_5 n \rfloor + 1 \right) + \frac{1}{2} \cdot \frac{n^3 - n}{3}
+A(n) = \frac{n^3}{6} + \frac{n^2}{8} + \frac{n}{4} \cdot \lceil \log_2 n \rceil + \frac{n}{8} \cdot \lfloor \log_5 n \rfloor  - \frac{n}{24}
 \end{equation*}
 
-\textbf{Breakdown:}
 
-\textbf{Contribution of a specific pattern (with probability ):}
+The dominant term here is \( \frac{n^3}{6}\) , as it grows faster than all other terms. Therefore, the final average case complexity is:
 
-This term implies a linear growth where the assignments are executed th of the time, contributing .
+\[
+A(n) = \frac{n^3}{6} + \frac{n^2}{8} + \frac{n}{4} \cdot \lceil \log_2 n \rceil + \frac{n}{8} \cdot \lfloor \log_5 n \rfloor  - \frac{n}{24} \in \boldsymbol{\theta(n^3)}
+\]
 
-\textbf{Contribution of another pattern (with probability ):}
 
-The term  reflects logarithmic assignments over  iterations, contributing .
-
-\textbf{Contribution of a third pattern (with probability ):}
-
-This term also contributes  due to the logarithmic behavior scaled by .
-
-\textbf{Contribution of complex nested structures (with probability ):}
-
-This term, representing cubic growth over  of the scenarios, dominates the average case, contributing .
-
-\textbf{Final result:} The combined average complexity is driven by the cubic term, making the overall average case:
 
 
 	\subsection{Basic operations are the four assignments marked as (4)}
 
-	\subsubsection{Analysis of B(n)}
- \noindent The notation for the analysis is as follows:
+\subsubsection{Analysis of B(n)}
+
+The best-case scenario for the input occurs when the first element is 'e' and the remaining elements are 'p'. When the first element is 'e', no basic operations are executed since the condition for the outer loop is not satisfied. In the case of 'p', the number of basic operations is determined by taking the floor of the array size divided by 5 continuously giving the logarithmic term. The expression is:
 \begin{equation*}
 0 + (n-1) \cdot \left( \lfloor \log_5 n \rfloor + 1 \right)
 \end{equation*}
 
+For larger inputs, \( (n-1) \) term behaves like \( n \) and the other term behaves like \( \log n \), which yields the complexity of \( \theta(n \log n) \).
+
+\[
+B(n) = (n-1) \cdot \left( \lfloor \log_5 n \rfloor + 1 \right) \in \boldsymbol{ \theta(n \log n) }
+\]
+
 	\subsubsection{Analysis of W(n)}
- \noindent The expression is as follows:
+ The worst-case scenario for the input occurs when the first element is 'c' and the remaining elements are 'e'. In the case of 'e', more basic operations are performed except for the 0th index, which has the highest number of basic operations for the 'c' case as it depends on \( n \), whereas 'e' does not involve any basic operations. For the 'c' case, the y-value of the inner for loop jumps \( j \) times—which depends on the value of \( i \) in the outer loop—every time it is iterated, yielding the following equation: \(( n +  \sum_{i=1}^{n} \lfloor\frac{n}{i} \rfloor)\). For the remaining part, consisting of all 'e' cases, the number of basic operations is determined by three nested sigma notations. Adding up the two parts, a general expression is obtained:
+\[
+( n +  \sum_{i=1}^{n} \lfloor\frac{n}{i} \rfloor) +  \sum_{i=0}^{n-1} \sum_{m=1}^{i} \sum_{l=m}^{n} n
+\]
+ 
+ 
+ Summing these and converting nested sigma notations into the regular formula, the expression is as follows:
+
 \begin{equation*}
-\left( n + n \sum_{i=1}^{n} \frac{1}{i} \right) + \frac{n^4 - n^2}{3}
+\left( n +  \sum_{i=1}^{n} \lfloor\frac{n}{i} \rfloor \right) + \frac{n^4 - n^2}{3}
 \end{equation*}
+The harmonic series with n over all i gives the time complexity of $n \cdot\log n$ as harmonic series approaches $\log n$ as n grows.
+Thus, the dominant term is $n^4$ for larger values of n, implying the theta notation of \( \theta(n^4) \).
+
+\[
+W(n) = \left( n +  \sum_{i=1}^{n} \lfloor\frac{n}{i} \rfloor \right) + \frac{n^4 - n^2}{3} \in \boldsymbol{\theta(n^4)}
+\]
 
 	
         \subsubsection{Analysis of A(n)}
-        \begin{equation*}
-\frac{n}{8} \cdot ( n + n \sum_{i=1}^{n} \frac{1}{i} ) + \frac{n}{4} \cdot \lceil \log_2 n \rceil + \frac{n}{8} \cdot \left( \lfloor \log_5 n \rfloor + 1 \right) + \frac{n^4 - n^2}{6}
+The average case analysis requires considering the probability distribution of the different input elements ('c', 'm', 'p', 'e') and the number of times the basic operations are executed for each scenario. Let's divide the analysis into steps and clearly analyze the conditional probabilities.
+
+
+ \[
+A(n) = \mathbb{E}[T] = \mathbb{E}[T_1] + \mathbb{E}[T_2] + \mathbb{E}[T_3] + \mathbb{E}[T_4]
+\]
+
+ where $T_1$ is the number of basic operations involved when the if condition matches 'c', $T_2$ is the number of basic operations involved when the if condition matches 'm', $T_3$ is the number of basic operations involved when the if condition matches 'p' and $T_4$ is the number of basic operations involved when the if condition matches 'e'
+
+
+\textbf{1. $\mathbf{E[T_1]}$}:
+
+
+ The occurrence of the letter 'c' in a n-size array is n/8 on average as the probability suggests. The basic operation is performed \(( n +  \sum_{i=1}^{n} \lfloor\frac{n}{i} \rfloor)\) times for each term as explained in the worst-case analysis. As the frequency of ‘c’ is n/8, the following formula is obtained:
+   
+   \[
+   \frac{n}{8} \cdot  ( n +  \sum_{i=1}^{n} \lfloor\frac{n}{i} \rfloor) \]
+
+   
+
+
+\textbf{2. $\mathbf{E[T_2]}$}:
+
+ For each term, number of basic operation is determined by a logarithmic term in base 2, since the basic operation is performed until n is exceeded by continuous multiplication of 2. Multiplying with the average occurrence of the letter 'm' in a n-size array, that is n/4, the following expression is obtained: 
+\[
+\frac{n}{4} \cdot \lceil \log_2 n \rceil
+\]
+
+\textbf{3. $\mathbf{E[T_3]}$}:
+
+For each term, the number of basic operations is determined by taking the floor of the array size divided by 5 continuously giving the logarithmic term in base 5. Multiplying with the average occurrence of the letter 'p' in a n-size array, that is n/8, the following expression is obtained: 
+\[ 
+\frac{n}{8} \cdot \left( \lfloor \log_5 n \rfloor + 1 \right)
+\]
+
+\textbf{4. $\mathbf{E[T_4]}$}:
+
+\[
+\mathbb{E}[T_4] = \sum_{i=0}^{n-1} \mathbb{E}[\tau \mid X=i] \cdot P(X=i)
+\]
+P(X = i) is 1/2 as it is given, and the $\mathbb{E}[\tau \mid X=i]$ is calculated as follows:
+\[
+\mathbb{E}[\tau \mid X=i] = \sum_{m=1}^{i} \sum_{l=m}^{n} n = n^2i - n\frac{i^2}{2} + n\frac{i}{2} 
+\]
+
+\[
+\mathbb{E}[T_4] = \frac{1}{2} \sum _{i=0}^{n-1}( n^2i - n\frac{i^2}{2} + n\frac{i}{2} )= \frac{n^4 - n^2}{6}
+\]
+
+Combining these contributions:
+     
+\begin{equation*}
+A(n) = \frac{n^4}{6} - \frac{n^2}{24} + \frac{n}{8} \cdot \sum_{i=1}^{n} \lfloor\frac{n}{i} \rfloor + \frac{n}{4} \cdot \lceil \log_2 n \rceil + \frac{n}{8} \cdot \lfloor \log_5 n \rfloor + \frac{n}{8}
 \end{equation*}
 
-	\section{Identification of Basic Operation(s)}
+The dominant term here is \( \frac{n^4}{6}\) , as it grows faster than all other terms. Therefore, the final average case complexity is:
 
-The assignments marked as (4) were chosen as the basic operations because they are executed within nested loops that contribute significantly to the overall computational effort of the algorithm. These assignments directly impact the total runtime as they are repeated multiple times based on the input size \( n \) and the structure of the algorithm. 
+\[
+A(n) = \frac{n^4}{6} - \frac{n^2}{24} + \frac{n}{8} \cdot \sum_{i=1}^{n} \lfloor\frac{n}{i} \rfloor + \frac{n}{4} \cdot \lceil \log_2 n \rceil + \frac{n}{8} \cdot \lfloor \log_5 n \rfloor + \frac{n}{8} \in \boldsymbol{\theta(n^4)}
+\]
+
+
+	\section{Identification of Basic Operation(s)}
+The assignments marked as (4) were chosen as basic operations because they dominate the computational workload in nested loops, directly impacting runtime. These operations reflect the critical computational steps that align with real execution time in practical scenarios.
+
+
 
 	\section{Real Execution}
 
@@ -532,6 +682,21 @@ The assignments marked as (4) were chosen as the basic operations because they a
 
 	\subsubsection{Comments}
 
+    \begin{itemize}
+    \item \textbf{Basic Operation Marked as (1) vs Real Execution Time:} \\
+    The theoretical graph for (1) shows a linear relationship with \(n\), which does not align with the real execution graph. It fails to represent the actual computational effort of the algorithm.
+
+    \item \textbf{Basic Operation Marked as (2) vs Real Execution Time:} \\
+    The theoretical graph for (2) remains constant at zero, making it completely unrealistic and unrelated to the real execution time. This choice is invalid.
+
+    \item \textbf{Basic Operation Marked as (3) vs Real Execution Time:} \\
+    The theoretical graph for (3) reflects an \(n \log n\) growth, aligning closely with the real execution graph. This makes (3) an appropriate choice for representing the algorithm’s computational workload for the best case.
+
+    \item \textbf{Basic Operation Marked as (4) vs Real Execution Time:} \\
+    The theoretical graph for (4) reflects an \(n \log n\) growth, aligning closely with the real execution graph. This makes (4) an appropriate choice for representing the algorithm’s computational workload for the best case.
+\end{itemize}
+
+
 
 
 	\subsection{Worst Case}
@@ -796,7 +961,21 @@ The assignments marked as (4) were chosen as the basic operations because they a
 	\end{tikzpicture}
 	\end{figure}
 
-	\subsubsection{Comments}
+\subsubsection{Comments}
+
+\begin{itemize}
+    \item \textbf{Basic Operation Marked as (1) vs Real Execution Time:} \\
+    The theoretical graph for (1) shows a linear relationship with \(n\), which does not align with the real execution graph. Its linear complexity makes it an inappropriate representation of the algorithm’s worst-case behavior.
+
+    \item \textbf{Basic Operation Marked as (2) vs Real Execution Time:} \\
+    The theoretical graph for (2) exhibits a complexity of \(n^2\), which grows slower than the real execution graph. This mismatch makes it an invalid choice for modeling the worst case.
+
+    \item \textbf{Basic Operation Marked as (3) vs Real Execution Time:} \\
+    The theoretical graph for (3) reflects a complexity of \(n^3\). While it grows faster than \(n^2\), it still does not align well with the real execution graph, making it an unsuitable choice.
+
+    \item \textbf{Basic Operation Marked as (4) vs Real Execution Time:} \\
+    The theoretical graph for (4) reflects a complexity of \(n^4\), which closely aligns with the real execution graph. This makes it the most accurate and appropriate choice for representing the algorithm’s worst-case behavior.
+\end{itemize}
 
 
 
@@ -1065,6 +1244,20 @@ The assignments marked as (4) were chosen as the basic operations because they a
 
 
 
-	\subsubsection{Comments}
+\subsubsection{Comments}
+
+\begin{itemize}
+    \item \textbf{Basic Operation Marked as (1) vs Real Execution Time:} \\
+    The theoretical graph for (1) shows a linear relationship with \(n\), which does not align with the real execution graph. Its simplicity makes it an inappropriate representation of the algorithm’s average-case behavior.
+
+    \item \textbf{Basic Operation Marked as (2) vs Real Execution Time:} \\
+    The theoretical graph for (2) reflects a complexity of \(n^2 \log n\), which grows slower than the real execution graph. This mismatch makes it an unsuitable choice for modeling the average case.
+
+    \item \textbf{Basic Operation Marked as (3) vs Real Execution Time:} \\
+    The theoretical graph for (3) reflects a complexity of \(n^3\). While it shows faster growth than \(n^2 \log n\), it still does not align well with the real execution graph, making it an inadequate representation.
+
+    \item \textbf{Basic Operation Marked as (4) vs Real Execution Time:} \\
+    The theoretical graph for (4) reflects a complexity of \(n^4\), which closely aligns with the real execution graph. This makes it the most appropriate and realistic choice for representing the algorithm’s average-case behavior.
+\end{itemize}
 
 \end{document}
