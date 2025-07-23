@@ -109,7 +109,7 @@ import matplotlib.pyplot as plt
 #
 #
 #Monte Carlo Experiment
-N = 50
+N = 100000
 cnt = 0
 x_in = []
 y_in = []
